@@ -1,0 +1,30 @@
+<?php
+
+echo $this->form()->openTag($form);
+
+echo "<div>";
+echo $this->formLabel($form->get('nome'));
+echo "</div>";
+
+
+echo "<div>";
+echo $this->formInput($form->get('nome'));
+foreach($form->get('nome')->getMessages() as $message){
+	echo $message;
+}
+echo "</div>";
+
+echo "<div>";
+echo $this->formLabel($form->get('sobrenome'));
+echo "</div>";
+
+echo "<div>";
+echo $this->formInput($form->get('sobrenome'));
+echo "</div>";
+
+echo "<hr>";
+echo "<div>";
+echo $this->formRow($form->get('submit'));
+echo "</div>";
+echo $this->form()->closeTag();
+?>

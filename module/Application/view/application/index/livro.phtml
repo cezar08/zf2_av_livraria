@@ -1,0 +1,18 @@
+
+
+
+<div class=''>
+	<label>Editora:</label><label><?php echo $autores[0]['nome_editora'] ?></label>
+</div>
+<div class=''>
+	<label>Edição:</label><label><?php echo $autores[0]['edicao'] ?></label>
+</div>
+<div class=''>
+	<label>Valor:</label><label><?php echo $autores[0]['valor_livro'] ?></label>
+</div>
+<div class=''>
+	<label>Autores:</label>
+	<?php foreach($autores as $autor){ ?>
+		<label><?php echo $autor['nome_autor'].',' ?></label>
+	<?php } ?>
+</div>

@@ -1,0 +1,30 @@
+<button onclick="location.href = '/admin/categorias/save'">
+    Nova categoria
+</button>
+
+<?php
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+?>
+
+<table>
+    <thead>
+    <th>Descrição</th>
+</thead>
+<?php foreach ($categorias as $categoria) { ?>
+    <tr>
+        <td><?php echo $categoria['descricao']; ?></td>
+        
+        <td><a href="/admin/categorias/save/id/<?php echo $categoria['id']; ?>" >Editar</a></td>
+        <td><a href="/admin/categorias/delete/id/<?php echo $categoria['id']; ?>" >Excluir</a></td>
+    </tr>
+<?php } ?>
+
+</table>
+
+<?php
+echo $this->paginationControl(
+        $categorias, 'Sliding', 'partials/paginator/control.phtml'
+);
+?>

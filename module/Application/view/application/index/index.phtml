@@ -1,0 +1,54 @@
+<div class="jumbotron">
+    <h1><?php echo sprintf($this->translate('Welcome to my %sBookstored%s'), '<span class="zf-green">', '</span>') ?></h1>
+    <p><?php echo sprintf($this->translate('Do not watch soap operas, buy books')) ?></p>
+    
+</div>
+
+<div class="row">
+
+    <?php 
+    echo "<div >";
+    echo $this->form()->openTag($form);
+
+    echo $this->formInput($form->get('busca')->setAttribute('class', 'form-control'));
+    echo "<br/>";
+    echo $this->formInput($form->get('submit')->setAttribute('class','btn'));
+    
+    echo $this->form()->closeTag();
+    echo '</div>';
+    echo "<br/>";
+    
+
+    ?>
+
+    <?php foreach($livros as $livro){ ?>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $this->translate($livro['titulo']) ?></h3>
+            </div>
+            <div class="panel-body">
+                <p><?php echo sprintf($this->translate($livro['sinopse'])) ?></p>
+                <p><a class="btn btn-success pull-right" href="#" id='<?php echo $livro['id'] ?>' onclick='ajax(this.id)' >
+                <?php echo $this->translate('ver mais') ?> &raquo;</a></p>
+                <div id="results<?php echo $livro['id']; ?>"></div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+
+</div>
+
+<script type="text/javascript">
+    function ajax(id){
+        
+        $.ajax({
+            url: "/application/index/livro/id/"+id,
+            cache: false
+        }).done(function( html ) {
+            $("#results"+id).append(html);
+        });
+        
+    }
+
+</script>

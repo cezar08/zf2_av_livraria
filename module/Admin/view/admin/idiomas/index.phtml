@@ -1,0 +1,30 @@
+<button onclick="location.href = '/admin/idiomas/save'">
+    Nova idioma
+</button>
+
+<?php
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+?>
+
+<table>
+    <thead>
+    <th>Descrição</th>
+</thead>
+<?php foreach ($idiomas as $idioma) { ?>
+    <tr>
+        <td><?php echo $idioma['descricao']; ?></td>
+        
+        <td><a href="/admin/idiomas/save/id/<?php echo $idioma['id']; ?>" >Editar</a></td>
+        <td><a href="/admin/idiomas/delete/id/<?php echo $idioma['id']; ?>" >Excluir</a></td>
+    </tr>
+<?php } ?>
+
+</table>
+
+<?php
+echo $this->paginationControl(
+        $idiomas, 'Sliding', 'partials/paginator/control.phtml'
+);
+?>

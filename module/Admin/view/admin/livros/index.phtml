@@ -1,0 +1,30 @@
+<button onclick="location.href = '/admin/livros/save'">
+    Novo livro
+</button>
+
+<?php
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+?>
+
+<table>
+    <thead>
+    <th>Titulo</th><th>Valor</th>
+</thead>
+<?php foreach ($livros as $livro) { ?>
+    <tr>
+        <td><?php echo $livro['titulo']; ?></td>
+        <td><?php echo 'R$ '.$livro['valor_livro']; ?></td>
+        <td><a href="/admin/livros/save/id/<?php echo $livro['id']; ?>" >Editar</a></td>
+        <td><a href="/admin/livros/delete/id/<?php echo $livro['id']; ?>" >Excluir</a></td>
+    </tr>
+<?php } ?>
+
+</table>
+
+<?php
+echo $this->paginationControl(
+        $livros, 'Sliding', 'partials/paginator/control.phtml'
+);
+?>

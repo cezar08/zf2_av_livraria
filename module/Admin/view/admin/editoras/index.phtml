@@ -1,0 +1,30 @@
+<button onclick="location.href = '/admin/editoras/save'">
+    Nova editora
+</button>
+
+<?php
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+?>
+
+<table>
+    <thead>
+    <th>Nome</th><th>Telefone</th>
+</thead>
+<?php foreach ($editoras as $editora) { ?>
+    <tr>
+        <td><?php echo $editora['nome']; ?></td><td><?php echo $editora['telefone']; ?></td>
+        
+        <td><a href="/admin/editoras/save/id/<?php echo $editora['id']; ?>" >Editar</a></td>
+        <td><a href="/admin/editoras/delete/id/<?php echo $editora['id']; ?>" >Excluir</a></td>
+    </tr>
+<?php } ?>
+
+</table>
+
+<?php
+echo $this->paginationControl(
+        $editoras, 'Sliding', 'partials/paginator/control.phtml'
+);
+?>

@@ -1,0 +1,30 @@
+<button onclick="location.href = '/admin/autores/save'">
+    Novo autor
+</button>
+
+<?php
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+?>
+
+<table>
+    <thead>
+    <th>Nome</th><th>Sobrenome</th>
+</thead>
+<?php foreach ($autores as $autor) { ?>
+    <tr>
+        <td><?php echo $autor['nome']; ?></td>
+        <td><?php echo $autor['sobrenome']; ?></td>
+        <td><a href="/admin/autores/save/id/<?php echo $autor['id']; ?>" >Editar</a></td>
+        <td><a href="/admin/autores/delete/id/<?php echo $autor['id']; ?>" >Excluir</a></td>
+    </tr>
+<?php } ?>
+
+</table>
+
+<?php
+echo $this->paginationControl(
+        $autores, 'Sliding', 'partials/paginator/control.phtml'
+);
+?>

@@ -1,0 +1,17 @@
+<button onclick="location.href='/admin/usuarios/add'">
+    Novo usuário
+</button>
+<table>
+    <thead>
+    <th>Login</th><th>Perfil</th>
+</thead>
+<?php foreach ($usuarios as $usuario) { ?>
+    <tr>
+        <td><?php  echo $usuario['login']; ?></td>
+        <td><?php echo $usuario['perfil']; ?></td>
+        <td><a href="/admin/usuarios/update/id/<?php echo $usuario['id']; ?>" >Editar</a></td>
+        <td><a href="/admin/usuarios/delete/id/<?php echo $usuario['id']; ?>" >Excluir</a></td>
+    </tr>
+<?php } ?>
+
+</table>

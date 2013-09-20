@@ -2,4 +2,10 @@
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
 echo $this->form()->closeTag();
+
+ if ($this->flashMessenger()->getErrorMessages()) { 
+	   foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
+                   echo $msg;
+      }
+ }
 ?>

@@ -32,9 +32,14 @@ public function loginAction()
 
 	$data = $request->getPost();
 	$service = $this->getServiceLocator()->get('Core\Service\Auth');
+	try{
 	$auth = $service->authenticate(
 		array('login' => $data['login'], 'senha' => $data['senha'])
 		);
+	}catch(\Exception $e){
+		$this->flashMessenger()->addErrorMessage($e->getMessage());
+		return $this->redirect()->toUrl('/admin/auth');
+	}
 	return $this->redirect()->toUrl('/admin/livros');
 }
 

@@ -1,0 +1,37 @@
+<button onclick="location.href = '<?php echo $this->urlNew; ?>'">
+    <?php echo $this->titleNew; ?>
+</button>
+<div style='margin: 20px;'>
+<?php
+echo $this->form()->openTag($this->formSearch);
+echo $this->formCollection($this->formSearch);
+echo $this->form()->closeTag();
+?>
+</div>
+<table style='width: 100%;'>
+    <thead>
+        <?php foreach ($this->tableHead as $head) { ?>        
+        <th><?php echo $head; ?></th> 
+    <?php } ?>
+</thead>
+<?php foreach ($this->dataTable as $data) { ?>
+    <tr>
+        <?php 
+        
+        foreach ($this->dataIndex as $dataIndex) { ?>            
+            <td><?php echo $data[$dataIndex]; ?></td>
+        <?php } ?>
+        <td><a href="/<?php echo $this->module; ?>/
+        <?php echo $this->controller; ?>/save/id/<?php echo $data['id']; ?>" >Editar</a></td>
+        <td><a href="/<?php echo $this->module; ?>/
+        <?php echo $this->controller; ?>/delete/id/<?php echo $data['id']; ?>" >Excluir</a></td>
+    </tr>
+<?php } ?>
+
+</table>
+
+<?php
+echo $this->paginationControl(
+        $this->dataTable, 'Sliding', 'partials/paginator/control.phtml'
+);
+?>

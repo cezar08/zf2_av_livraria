@@ -38,8 +38,7 @@ class IndexController extends CoreController
             $busca = mb_strtoupper($request->getPost('busca'), 'UTF-8');
             $select->where->like('titulo', "%$busca%");
         }
-
-        
+               
         $paginatorAdapter = new PaginatorDbSelectAdapter($select, $sql);
         $paginator = new Paginator($paginatorAdapter);
         $paginator->setItemCountPerPage(5);
@@ -53,6 +52,8 @@ class IndexController extends CoreController
     }
 
     public function livroAction(){
+		
+		
         $id = (int) $this->params()->fromRoute('id', 0);
         $adapter = $this->getServiceLocator()->get('DbAdapter');
         $sql = new Sql($adapter);
@@ -97,6 +98,10 @@ class IndexController extends CoreController
             $session->offSetSet('language', $param);
             return $this->redirect()->toUrl('/');
         }
+        
+        public function noauthorizeAction(){
+			die('sai dai');
+		}
 
 
     }

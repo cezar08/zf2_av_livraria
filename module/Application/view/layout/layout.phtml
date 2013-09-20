@@ -3,26 +3,31 @@
 <html lang="pt-BR">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle( $this->translate('Bookstore'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle($this->translate('Bookstore'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
         ?>
 
         <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/style.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+        ?>
 
         <!-- Scripts -->
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-            ->prependFile($this->basePath() . '/js/jquery.min.js')
-            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
-        ; ?>
+        <?php
+        echo $this->headScript()
+                ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/js/jquery.min.js')
+                ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        ;
+        ?>
 
     </head>
     <body>
@@ -40,34 +45,34 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
                     </ul>
-                    <?php 
-                    $user = $this->session()->offsetGet('user');
-                        if($user){
-                     ?>
-                    <ul class="nav navbar-nav">
-                        <li ><a href="/admin/livros"><?php echo $this->translate('Books') ?></a></li>
-                    </ul>                    
-                    
-                    <ul class="nav navbar-nav">
-                        <li ><a href="/admin/usuarios"><?php echo $this->translate('Users') ?></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li ><a href="/admin/categorias"><?php echo $this->translate('Categories') ?></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li ><a href="/admin/idiomas"><?php echo $this->translate('Languages') ?></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li ><a href="/admin/autores"><?php echo $this->translate('Authors') ?></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li ><a href="/admin/editoras"><?php echo $this->translate('Publishers') ?></a></li>
-                    </ul>
+<?php
+$user = $this->session()->offsetGet('user');
+if ($user) {
+    ?>
+                        <ul class="nav navbar-nav">
+                            <li ><a href="/admin/livros"><?php echo $this->translate('Books') ?></a></li>
+                        </ul>                    
 
-                    <ul class="nav navbar-nav">
-                        <li ><a href="/admin/auth/logout"><?php echo $this->translate('Logout') ?></a></li>
-                    </ul>                    
-                    <?php } ?>
+                        <ul class="nav navbar-nav">
+                            <li ><a href="/admin/usuarios"><?php echo $this->translate('Users') ?></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li ><a href="/admin/categorias"><?php echo $this->translate('Categories') ?></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li ><a href="/admin/idiomas"><?php echo $this->translate('Languages') ?></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li ><a href="/admin/autores"><?php echo $this->translate('Authors') ?></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li ><a href="/admin/editoras"><?php echo $this->translate('Publishers') ?></a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav">
+                            <li ><a href="/admin/auth/logout"><?php echo $this->translate('Logout') ?></a></li>
+                        </ul>                    
+<?php } ?>
 
                     <ul class="nav navbar-nav">
                         <li><a href="/application/index/idioma/idioma/pt_BR"><?php echo '<img src="/img/brazil.png" />' ?></a></li>
@@ -78,14 +83,55 @@
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-        
+
+        <!-- Msg Error -->
+
+            <?php if ($this->flashMessenger()->getErrorMessages()) {
+                ?>
+            <div style='color: red; width: 100%; border: solid 1px red; text-align: center;'>
+                
+                <h4>Erro!</h4>
+            <?php
+            foreach ($this->flashMessenger()->getErrorMessages() as $msg) {
+                echo $msg;
+            }
+            ?>
+            </div>
+<?php } ?>
+
+        <!-- Msg Warning -->   
+
+            <?php if ($this->flashMessenger()->getInfoMessages()) { ?>
+            <div style='color: yellow; width: 100%; border: solid 1px yellow; text-align: center;'>
+                
+                <h4>Alerta!</h4>
+            <?php
+            foreach ($this->flashMessenger()->getInfoMessages() as $msg) {
+                echo $msg;
+            }
+            ?>
+            </div>
+            <?php } ?>
+
+            <?php if ($this->flashMessenger()->getSuccessMessages()) { ?>
+            <div style='color: green; width: 100%; border: solid 1px green; text-align: center;'>                
+                <h4>Sucesso!</h4>
+            <?php
+            foreach ($this->flashMessenger()->getSuccessMessages() as $msg) {
+                echo $msg;
+            }
+            ?>
+            </div>
+<?php } ?>
+
+
         <div class="container">
-            <?php echo $this->content; ?>
+        <?php echo $this->content; ?>
             <hr>
             <footer>
                 <p>&copy; 2013 - <?php echo date('Y') ?> by Bookstore Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
             </footer>
         </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
+<?php echo $this->inlineScript() ?>
     </body>
 </html>

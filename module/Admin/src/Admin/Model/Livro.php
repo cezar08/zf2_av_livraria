@@ -56,9 +56,14 @@ class Livro extends Entity {
                             'encoding' => 'UTF-8',
                             'min' => 4,
                             'max' => 255,
+                            'message' => 'O campo deve ter entre 4 e 255 caracteres'
                             ),
                         ),
-                    ),
+                        array(
+                                'name' => 'NotEmpty',
+                                'options' => array('message' => 'O campo Titulo não pode estar vazio')
+                            )
+                        ),
                 )));
            
             

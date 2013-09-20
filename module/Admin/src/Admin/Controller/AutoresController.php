@@ -65,11 +65,10 @@ class AutoresController extends CoreController {
                 try {
 
                     $this->getTable('\Admin\Model\Autor')->save($Autor);
-
+                    $this->flashMessenger()->addSuccessMessage('Autor armazenado com sucesso');
                     return $this->redirect()->toUrl('/admin/autores');
                 } catch (\Exception $e) {
-                    echo $e;
-                    exit;
+                    $this->flashMessenger()->addErrorMessage('Um erro ocorreu, tente novamente mais tarde');
                 }
             }
         }

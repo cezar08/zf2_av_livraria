@@ -17,6 +17,9 @@ use Zend\View\Model\ViewModel;
 class LivrosController extends CoreController {
 
     public function indexAction() {
+        $session = $this->getServiceLocator()->get('Session');
+
+
 
         $form = new \Admin\Form\Busca();
         $livro = $this->getTable('\Admin\Model\Livro');
@@ -34,19 +37,19 @@ class LivrosController extends CoreController {
         return new ViewModel(array(
             'livros' => $paginator,
             'form' => $form
-            ));
+        ));
     }
 
     public function saveAction() {
         $request = $this->getRequest();
 
         $categorias = $this->getTable('\Admin\Model\Categoria')
-        ->fetchAll(null, null, 'descricao ASC')->toArray(); 
+                        ->fetchAll(null, null, 'descricao ASC')->toArray();
         $idiomas = $this->getTable('\Admin\Model\Idioma')->fetchAll(null, null, 'descricao ASC')->toArray();
         $editoras = $this
-        ->getTable('\Admin\Model\Editora')->fetchAll(null, null, 'nome ASC')->toArray();
+                        ->getTable('\Admin\Model\Editora')->fetchAll(null, null, 'nome ASC')->toArray();
         $autores = $this
-        ->getTable('\Admin\Model\Autor')->fetchAll(null, null, 'nome ASC')->toArray();
+                        ->getTable('\Admin\Model\Autor')->fetchAll(null, null, 'nome ASC')->toArray();
         $form = new \Admin\Form\Livro($categorias, $idiomas, $editoras, $autores);
 
         if ($request->isPost()) {
@@ -63,7 +66,7 @@ class LivrosController extends CoreController {
 
                 unset($values['autores']);
                 $Livro->setData($values);
-                
+
                 try {
 
                     $id_livro = $this->getTable('\Admin\Model\Livro')->save($Livro); //Salva ou atualiza os dados da entidade livro
@@ -76,12 +79,11 @@ class LivrosController extends CoreController {
                 if ($values['id']) {
 
                     $autoresLivro = $this->getTable('\Admin\Model\AutorLivro')
-                    ->fetchAll(array('id_autor'), "id_livro = ". $values['id'])->toArray(); //No update pega todos os autores que possuem relação com o livro
+                                    ->fetchAll(array('id_autor'), "id_livro = " . $values['id'])->toArray(); //No update pega todos os autores que possuem relação com o livro
 
                     if ($autoresLivro) {
                         $this->getTable('\Admin\Model\AutorLivro')
-                        ->deleteBy('id_livro', $values['id']); //Deleta os autores que contém relacionamento com o livro
-
+                                ->deleteBy('id_livro', $values['id']); //Deleta os autores que contém relacionamento com o livro
                     }
                 }
                 foreach ($autores as $autor) {
@@ -90,12 +92,24 @@ class LivrosController extends CoreController {
                         $data = array('id_livro' => $id_livro->id, 'id_autor' => $autor);
                         $AutorLivro->setData($data);
 
+
                         $this->getTable('\Admin\Model\AutorLivro')->save($AutorLivro);
                     } catch (\Exception $e) {
                         echo $e;
                         exit;
                     }
                 }
+
+                $Email = $this->getServiceLocator()->get('Email');
+                $texto = "Olá, foi adicionado um novo livro:
+                    Livro: " . $values['titulo'];
+
+                $from = 'Livraria';
+                $to = array('email' => 'cezar08@unochapeco.edu.br', 'name' => 'Cezar');
+                $title = "Novo livro";
+                $Email->send($texto, $from, $to, $title);
+
+                $this->flashMessenger()->addSuccessMessage('Livro cadastrado com sucesso');
                 return $this->redirect()->toUrl('/admin/livros');
             }
         }
@@ -121,8 +135,6 @@ class LivrosController extends CoreController {
             'form' => $form)
         );
     }
-
-    
 
     public function deleteAction() {
         $id = (int) $this->params()->fromRoute('id', 0);

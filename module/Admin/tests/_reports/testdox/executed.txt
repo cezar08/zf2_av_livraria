@@ -1,0 +1,10 @@
+AutoresController
+ [x]  404
+ [x] Index action
+ [x] Save action new request
+ [x] Save action post request
+ [x] Save action update form request
+ [x] Save action invalid post request
+ [x] Invalid delete action
+ [x] Delete action
+

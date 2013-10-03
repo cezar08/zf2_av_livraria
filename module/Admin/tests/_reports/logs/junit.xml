@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Auth Test Suite" tests="8" assertions="29" failures="0" errors="0" time="8.189988">
+    <testsuite name="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" tests="8" assertions="29" failures="0" errors="0" time="8.189988">
+      <testcase name="test404" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="32" assertions="1" time="0.960031"/>
+      <testcase name="testIndexAction" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="40" assertions="5" time="1.704551"/>
+      <testcase name="testSaveActionNewRequest" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="73" assertions="5" time="0.767420"/>
+      <testcase name="testSaveActionPostRequest" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="99" assertions="4" time="1.010501"/>
+      <testcase name="testSaveActionUpdateFormRequest" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="124" assertions="7" time="0.921446"/>
+      <testcase name="testSaveActionInvalidPostRequest" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="161" assertions="3" time="0.826697"/>
+      <testcase name="testInvalidDeleteAction" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="191" assertions="2" time="0.922235"/>
+      <testcase name="testDeleteAction" class="AutoresControllerTest" file="/var/www/cursos/livraria/module/Admin/tests/src/Admin/Controller/AutoresControllerTest.php" line="206" assertions="2" time="1.077107"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

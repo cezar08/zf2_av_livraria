@@ -68,7 +68,7 @@ class TableGateway extends AbstractTableGateway {
         $rowset = $this->select(array($this->pk => $id));
         $row = $rowset->current();
         if (!$row) {
-            die("Não exixste ID $id");
+            throw new \Exception("Linha inexistente");
         }
         return $row;
     }
@@ -82,13 +82,13 @@ class TableGateway extends AbstractTableGateway {
         if ($id == 0) {
 
             if ($this->insert($data) < 1)
-                die("Erro ao inserir");
+                throw new \Exception("Erro ao inserir");
 
             $object->id = $this->lastInsertValue;
         } else {
             
             if (!$this->get($id))
-                die('Id não existe');
+                throw new \Exception("Id não existe");
             
             $this->update($data, array($this->pk => $id));                    
                 //die("Erro ao atualizar");

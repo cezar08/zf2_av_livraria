@@ -1,4 +1,3 @@
-
 <?php
 
 use Core\Test\ControllerTestCase;
@@ -88,8 +87,12 @@ class AutoresControllerTest extends ControllerTestCase
             $form = $variables['form'];
         //testa os ítens do formulário
             $id = $form->get('id');
+            
             $this->assertEquals('id', $id->getName());
             $this->assertEquals('hidden', $id->getAttribute('type'));
+            $nome = $form->get('nome');
+            $this->assertEquals('nome', $nome->getName());
+            $this->assertEquals('text', $nome->getAttribute('type'));
         }
 
 
